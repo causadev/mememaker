@@ -16,10 +16,20 @@
 
 
   <div class="flex gap-4">
-    <img src="artworks-D0ZqXIygRxHr7b7Y-LKzWjA-t500x500.jpg" draggable="false" alt="meme">
+    <div class="relative">
+      <img src="artworks-D0ZqXIygRxHr7b7Y-LKzWjA-t500x500.jpg" draggable="false" alt="meme">
+      <div class="absolute top-2 text-center left-1/2 -translate-x-1/2 w-full">
+        <p class="topText text-5xl font-semibold">ALL MY HOMIES</p>
+      </div>
+      <div class="absolute bottom-2 text-center left-1/2 -translate-x-1/2 w-full">
+        <p class="bottomText text-5xl font-semibold">USE KOVAAKS</p>
+      </div>
+    </div>
     <div class="flex flex-col gap-4 py-4">
-      <span contenteditable="" role="textbox" class="w-[28rem] bg-zinc-700 rounded-lg outline-none p-2 overflow-hidden text-wrap"></span>
-      <span contenteditable="" role="textbox" class="w-[28rem] bg-zinc-700 rounded-lg outline-none p-2 overflow-hidden text-wrap"></span>
+      <span contenteditable="" role="textbox"
+        class="w-[28rem] bg-zinc-700 rounded-lg outline-none p-2 overflow-hidden text-wrap" data-top-text></span>
+      <span contenteditable="" role="textbox"
+        class="w-[28rem] bg-zinc-700 rounded-lg outline-none p-2 overflow-hidden text-wrap" data-bottom-text></span>
       <button class="px-9 py-2 bg-blue-400 rounded-lg">Download</button>
     </div>
   </div>

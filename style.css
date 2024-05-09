@@ -8,3 +8,7 @@
   color: CanvasText;
   color-scheme: light dark;
 }
+
+p {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
