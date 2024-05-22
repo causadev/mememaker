@@ -61,7 +61,7 @@ function growText(textEl) {
 
 
 function onKeydown(e) {
-  if (e.key !== "Backspace" || e.key !== "x" || e.key !== "Control") return
+  if (e.key !== "Backspace" && e.key !== "x" && e.key !== "Control") return
   if (e.target.matches("[data-top-text]")) {
     growText(topText)
   } else {
