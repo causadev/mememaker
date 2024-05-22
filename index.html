@@ -19,7 +19,7 @@
     <div class="relative overflow-hidden">
       <img src="artworks-D0ZqXIygRxHr7b7Y-LKzWjA-t500x500.jpg" draggable="false" alt="meme">
       <div class="absolute top-2 flex justify-center items-center left-1/2 -translate-x-1/2 w-full">
-        <p class="topText text-5xl font-semibold border w-fit"></p>
+        <p class="topText text-5xl font-semibold w-fit"></p>
       </div>
       <div class="absolute bottom-2 flex justify-center items-center left-1/2 -translate-x-1/2 w-full">
         <p class="bottomText text-5xl font-semibold"></p>
@@ -30,9 +30,20 @@
         class="w-[28rem] bg-zinc-700 rounded-lg outline-none p-2 overflow-hidden text-wrap" data-top-text></span>
       <span contenteditable="" role="textbox"
         class="w-[28rem] bg-zinc-700 rounded-lg outline-none p-2 overflow-hidden text-wrap" data-bottom-text></span>
-      <button class="px-9 py-2 bg-blue-500 rounded-lg hover:bg-blue-600 transition ease-in-out">Download</button>
+      <button class="px-9 py-2 bg-blue-500 rounded-lg hover:bg-blue-600 transition ease-in-out">Download meme!</button>
     </div>
   </div>
+<div class="flex justify-center items-center mt-5 mr-[30rem] gap-4">
+  <form action="">
+    <input type="file" id="files" class="hidden" 
+    name="image_uploads"
+    accept=".jpg, .jpeg, .png"
+    multiple /> 
+    <label for="files" class="px-2 py-2 bg-blue-500 rounded-lg hover:bg-blue-600 transition ease-in-out">Make your meme!</label>
+  </form>
+  <button class="px-2 py-2 bg-blue-500 rounded-lg hover:bg-blue-600 transition ease-in-out">Generate meme!</button>
+</div>
+
   <script type="module" src="/main.js"></script>
 </body>
 
