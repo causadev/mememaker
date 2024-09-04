@@ -46,6 +46,7 @@ function shrinkText(textEl) {
   const { width: imageWidth } = image.getBoundingClientRect()
   let textWidth = getTextWidth(textEl)
 
+ 
 
   while (textWidth >= imageWidth) {
     baseFontSize = baseFontSize - 0.01
@@ -63,6 +64,12 @@ function growText(textEl) {
   if (baseFontSize >= 3) return
 
 
+
+  
+  
+  
+
+
   while (textWidth <= imageWidth) {
     baseFontSize = baseFontSize + 0.02
     textEl.style.fontSize = `${baseFontSize}rem`
@@ -73,6 +80,7 @@ function growText(textEl) {
 
 function onKeydown(e) {
   if (e.key !== "Backspace" && e.key !== "x" && e.key !== "Control") return
+  
   if (e.target.matches("[data-top-text]")) {
     growText(topText)
   }
@@ -114,21 +122,33 @@ function getRandomInt() {
   return Math.floor(Math.random() * 99);
 }
 
-let response;
+let memes
 
 genMeme.addEventListener("click", () => {
-  if (!response) {
+  const randomI = getRandomInt()
+  if (!memes) {
     fetch("https://api.imgflip.com/get_memes")
     .then(response => response.json())
     .then(response => {
-      const randomI = getRandomInt()
-      const apiImage = response.data.memes[randomI].url
-      image.src = response.data.memes[randomI].url
-      sessionStorage.setItem("ImageApi", apiImage)
+      memes = response.data.memes
+      loadImage(randomI)
+      sessionStorage.setItem("ImageApi", memes[randomI].url)
+
     })
     .catch(error => console.error(error));
   }
+
+  else if (memes) {
+    loadImage(randomI)
+  }
 });
+
+
+
+function loadImage(index) {
+  image.src = memes[index].url
+  clearText()
+}
 
 
 window.onload = (() => {
