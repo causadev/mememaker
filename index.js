@@ -9,6 +9,8 @@ const downloadBtn = document.querySelector("button")
 let baseFontSize = 3
 const genMeme = document.querySelector("#genMeme")
 const getTextWidth = (textEl) => textEl.getBoundingClientRect().width
+let baseFontSizeTop = 3;
+let baseFontSizeBottom = 3;
 
 
 
@@ -25,6 +27,7 @@ function clearText(e) {
   bottomText.textContent = ""
   topInput.textContent = ""
   bottomInput.textContent = ""
+  baseFontSize =  3
 }
 
 
@@ -33,61 +36,63 @@ function clearText(e) {
 function top(e) {
   topText.textContent = e.target.textContent
 
-  shrinkText(topText)
+  adjustTextSize(topText, true)
 
 }
 
 function bottom(e) {
   bottomText.textContent = e.target.textContent
-  shrinkText(bottomText)
+  adjustTextSize(bottomText, false)
 }
 
-function shrinkText(textEl) {
-  const { width: imageWidth } = image.getBoundingClientRect()
-  let textWidth = getTextWidth(textEl)
 
- 
+function adjustTextSize(textEl, isTopText) {
+  const { width: imageWidth } = image.getBoundingClientRect();
+  let textWidth = getTextWidth(textEl);
+  let baseFontSize = isTopText ? baseFontSizeTop : baseFontSizeBottom;
 
+  // Ajustar el tamaño del texto si excede el ancho de la imagen
   while (textWidth >= imageWidth) {
-    baseFontSize = baseFontSize - 0.01
-    textEl.style.fontSize = `${baseFontSize}rem`
-    textWidth = getTextWidth(textEl)
+    baseFontSize -= 0.01;
+    textEl.style.fontSize = `${baseFontSize}rem`;
+    textWidth = getTextWidth(textEl);
   }
-}
 
+  // Aumentar el tamaño del texto si hay espacio
+  while (textWidth < imageWidth && baseFontSize < 3) {
+    baseFontSize += 0.02;
+    textEl.style.fontSize = `${baseFontSize}rem`;
+    textWidth = getTextWidth(textEl);
+  }
 
-
-function growText(textEl) {
-  const { width: imageWidth } = image.getBoundingClientRect()
-  let textWidth = getTextWidth(textEl)
-
-  if (baseFontSize >= 3) return
-
-
-
-  
-  
-  
-
-
-  while (textWidth <= imageWidth) {
-    baseFontSize = baseFontSize + 0.02
-    textEl.style.fontSize = `${baseFontSize}rem`
-    textWidth = getTextWidth(textEl)
+  // Actualizar baseFontSize
+  if (isTopText) {
+    baseFontSizeTop = baseFontSize;
+  } else {
+    baseFontSizeBottom = baseFontSize;
   }
 }
 
 
 function onKeydown(e) {
-  if (e.key !== "Backspace" && e.key !== "x" && e.key !== "Control") return
-  
-  if (e.target.matches("[data-top-text]")) {
-    growText(topText)
-  }
-  if (e.target.matches("[data-bottom-text]")) {
-    growText(bottomText)
+  const textEl = e.target.matches("[data-top-text]") ? topText : bottomText;
+  const isTopText = e.target.matches("[data-top-text]");
+
+  // Si se borra el texto por completo, restablecer tamaño a 3rem
+  if (e.key === "Backspace" || e.key === "x") {
+    if (textEl.textContent.length === 0) {
+      if (isTopText) {
+        baseFontSizeTop = 3;
+        topText.style.fontSize = "3rem";
+      } else {
+        baseFontSizeBottom = 3;
+        bottomText.style.fontSize = "3rem";
+      }
+      void textEl.offsetWidth; // Forzar reflujo
+    }
   }
 }
+
 
 
 function uploadImage() {
